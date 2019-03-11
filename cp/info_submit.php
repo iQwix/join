@@ -75,13 +75,17 @@ if($_GET[$_SESSION['users']]){
 <?php
         $query5 = "SELECT `name`,`email`,`Country`,`age`,`twitter`,`instagram`,`status` FROM `register` WHERE `name` = '".$_SESSION['users']."'";
         $result5 = mysqli_query($conn, $query5);
+        echo $query5."<br>";
         if (mysqli_num_rows($result5) > 0) {
+            echo __LINE__ . "<br>";
             while($row5 = mysqli_fetch_assoc($result5)){
                 $result10 = mysqli_query($conn, $_SESSION['query']);
                 if(mysqli_num_rows($result10) > 0){
+                    echo __LINE__ . "<br>";
                     while($roww = mysqli_fetch_assoc($result10)){
                         echo "<div class='row'><div class='col-lg-4'><ul class='list-group'>";
                         foreach($roww as $key => $rows){
+                            echo __LINE__ . "<br>";
                             echo "<li class='selected list-group-item'><span'>{$key}</span> <span class='text-center'> > <span> <br> <span style='margin-left: 80px'>$rows</span></li>";
                         }
                         echo "</ul></div><div class='col-lg-4'>";
