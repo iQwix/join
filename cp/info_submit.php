@@ -28,7 +28,7 @@ if(isset($_SESSION['login']) == "Owner" or isset($_SESSION['login']) == "admin")
         $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `designer` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'editor'){
         $_SESSION['status_in'] = "editor";
-        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `editor` WHERE `username` = '".$_SESSION['users']."'"";
+        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `editor` WHERE `username` = '".$_SESSION['users']."'";
     }
     ?>
     <title>Info</title>
