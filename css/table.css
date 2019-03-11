@@ -1,0 +1,22 @@
+/* Start table create by rainbow */
+
+
+.container {
+    overflow: hidden;
+}
+
+.filterDiv {
+    display: none; /* Hidden by default */
+
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+    display: block;
+}
+
+.img1{
+    width: 100px
+}
+
+/* End table */
