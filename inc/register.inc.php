@@ -8,9 +8,9 @@ session_regenerate_id();
     }
     $http = str_replace(" ",'', $http);
     if($http === "" or $http === "index.php" or $http === "index.php "){
-            echo("<script>location.href = 'index.php';</script>");
+            exit("<script>location.href = 'index.php';</script>");
         }else if($_SERVER['REQUEST_METHOD'] !== "POST"){
-            echo("<script>location.href = 'index.php';</script>");
+            exit("<script>location.href = 'index.php';</script>");
         }else if(isset($_POST['submit'])){
             // تعريف الأنبوت مع حماية من
             // xss
@@ -29,60 +29,60 @@ session_regenerate_id();
 
             // معرفه الانبوت افارغه
             if(empty($name) || empty($email) || $country == "0" || empty($age) || empty($link1) || empty($link2) || $joinas == "0"){
-                echo("<script>location.href = 'index.php?error=empty';</script>");
+                exit("<script>location.href = 'index.php?error=empty';</script>");
 
             }else if(strlen($name) >= 30){ // حجم لارقام و الحروف في الانبوت
                 $_SESSION['name'] = $name;
-                echo("<script>location.href = 'index.php?error=mixname&name=".strlen($name)."';</script>");
+                exit("<script>location.href = 'index.php?error=mixname&name=".strlen($name)."';</script>");
             }else if(strlen($email) >= 100){
                 $_SESSION['email'] = $email;
-                echo("<script>location.href = 'index.php?error=mixemail&strlen=".strlen($email)."';</script>");
+                exit("<script>location.href = 'index.php?error=mixemail&strlen=".strlen($email)."';</script>");
             }else if(strlen($link1) >= 40){
                 $_SESSION['link1'] = $link1;
-                echo("<script>location.href = 'index.php?error=mixlink1&strlen=".strlen($link1)."';</script>");
+                exit("<script>location.href = 'index.php?error=mixlink1&strlen=".strlen($link1)."';</script>");
             }else if(strlen($link2) >= 40){
                 $_SESSION['link2'] = $link2;
-                echo("<script>location.href = 'index.php?error=mixlink2&strlen=".strlen($link2)."';</script>");
+                exit("<script>location.href = 'index.php?error=mixlink2&strlen=".strlen($link2)."';</script>");
 
             }else if(!is_string($name)){ // تاكيد من انه استرينق
                 $_SESSION['name'] = $name;
-                echo("<script>location.href = 'index.php?error=stringname&name=".$name."';</script>");
+                exit("<script>location.href = 'index.php?error=stringname&name=".$name."';</script>");
             }else if(!is_string($link1)){
                 $_SESSION['link1'] = $link1;
-                echo("<script>location.href = 'index.php?error=stringlink1&string=".$link1."';</script>");
+                exit("<script>location.href = 'index.php?error=stringlink1&string=".$link1."';</script>");
             }else if(!is_string($link2)){
                 $_SESSION['link2'] = $link2;
-                echo("<script>location.href = 'index.php?error=stringlink2&string=".$link2."';</script>");
+                exit("<script>location.href = 'index.php?error=stringlink2&string=".$link2."';</script>");
 
             }else if(!preg_replace("#[^a-zA-Z0-9]#i", "", $name)){ // هنا فقط يبل الحروف الانقلينزي والارقام
                 $_SESSION['name'] = $name;
-                echo("<script>location.href = 'index.php?error=strnumname&name=".$name."';</script>");
+                exit("<script>location.href = 'index.php?error=strnumname&name=".$name."';</script>");
             }else if(!preg_replace("#[^a-zA-Z0-9]#i", "", $email)){
                 $_SESSION['email'] = $email;
-                echo("<script>location.href = 'index.php?error=strnumemail&strnum=".$email."';</script>");
+                exit("<script>location.href = 'index.php?error=strnumemail&strnum=".$email."';</script>");
             }else if(!preg_replace("#[^a-zA-Z0-9]#i", "", $link1)){
                 $_SESSION['link1'] = $link1;
-                echo("<script>location.href = 'index.php?error=strnumlink1&strnum=".$link1."';</script>");
+                exit("<script>location.href = 'index.php?error=strnumlink1&strnum=".$link1."';</script>");
             }else if(!preg_replace("#[^a-zA-Z0-9]#i", "", $link2)){
                 $_SESSION['link2'] = $link2;
-                echo("<script>location.href = 'index.php?error=strnumlink2&strnum=".$link2."';</script>");
+                exit("<script>location.href = 'index.php?error=strnumlink2&strnum=".$link2."';</script>");
 
             }else if(strpos($name, ' ') != false){ // هنا تاككيد ان لا يوجد سبيس في الانبوت
                 $_SESSION['name'] = $name;
-                echo("<script>location.href = 'index.php?error=spacename&name=".str_replace(' ', '', $name)."';</script>");
+                exit("<script>location.href = 'index.php?error=spacename&name=".str_replace(' ', '', $name)."';</script>");
             }else if(strpos($email, ' ') != false){
                 $_SESSION['email'] = $email;
-                echo("<script>location.href = 'index.php?error=spaceemail&space=".str_replace(' ', '', $email)."';</script>");
+                exit("<script>location.href = 'index.php?error=spaceemail&space=".str_replace(' ', '', $email)."';</script>");
             }else if(strpos($link1, ' ') != false){
                 $_SESSION['link1'] = $link1;
-                echo("<script>location.href = 'index.php?error=spacelink1&space=".str_replace(' ', '', $link1)."';</script>");
+                exit("<script>location.href = 'index.php?error=spacelink1&space=".str_replace(' ', '', $link1)."';</script>");
             }else if(strpos($link2, ' ') != false){
                 $_SESSION['link2'] = $link2;
-                echo("<script>location.href = 'index.php?error=spacelink2&space=".str_replace(' ', '', $link2)."';</script>");
+                exit("<script>location.href = 'index.php?error=spacelink2&space=".str_replace(' ', '', $link2)."';</script>");
 
             }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ // هنا فلتره الايميل
                 $_SESSION['email'] = $email;
-                echo("<script>location.href = 'index.php?error=email&uid=".$email."';</script>");
+                exit("<script>location.href = 'index.php?error=email&uid=".$email."';</script>");
             }else{
                 include_once('connected.php');
 
@@ -101,43 +101,43 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($battleid1) || empty($sr1) || empty($level1) || $your_main1 == "0" || $platform1 == "0"){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
                         }else if (!preg_replace("#[^a-zA-Z0-9]#i", "", $battleid1)){// مسماح لل انبوت فقط خروف والارقام
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$battleid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$battleid1."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $sr1)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$sr1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$sr1."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $level1)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level1."';</script>");
 
                         }else if (strpos($battleid1, ' ') != false){ // ممنوع المسافات
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
                         }else if (strpos($sr1, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
                         }else if (strpos($level1, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$battleid1."';</script>");
 
                         }else if(!filter_var($sr1, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numbersr1&uid=".$sr1."';</script>");
+                            exit("<script>location.href = 'index.php?error=numbersr1&uid=".$sr1."';</script>");
 
                         }else if(!filter_var($level1, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberl1&uid=".$level2."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberl1&uid=".$level2."';</script>");
 
                         }else if (strlen($battleid1) >= 40){ // ممنوع يكثر عن 40 حرف
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$sr1."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$sr1."';</script>");
                         }else if (strlen($sr1) >= 5){ // ممنوع يكثر عن 99999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$sr1."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$sr1."';</script>");
                         }else if (strlen($level1) >= 5){ // ممنوع يكثر عن 99999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$level1."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$level1."';</script>");
 
                         }else if ($level1 <= 25){ // ممننوع يقل عن 25
-                            echo("<script>location.href = 'index.php?error=min&uid=".$level1."';</script>");
+                            exit("<script>location.href = 'index.php?error=min&uid=".$level1."';</script>");
 
                         }else{
                             // تعرف للقواعد البينات
                             $sql_select_ow = "SELECT username FROM `overwatch-team` WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_ow)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -147,14 +147,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_ow = "INSERT INTO `overwatch-team` (username,`Battle/PS4/xBox/ID`,`your-sr`,`your-level`,`your-main`,platform)VALUES(?,?,?,?,?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_ow)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ssiiss", $name, $battleid1, $sr1, $level1, $your_main1, $platform1);
 
@@ -177,31 +177,31 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($r6sid) || $your_rank1 == "0" || empty($level2) || $platform2 == "0"){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (!preg_replace("#[^a-zA-Z0-9]#i", "", $r6sid)){// مسماح لل انبوت فقط خروف والارقام
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$r6sid."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$r6sid."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $level2)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level2."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level2."';</script>");
 
                         }else if (strpos($r6sid, ' ') != false){ // ممنوع المسافات
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$r6sid."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$r6sid."';</script>");
                         }else if (strpos($level2, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$level2."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$level2."';</script>");
 
                         }else if(!filter_var($level2, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberl2&uid=".$level2."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberl2&uid=".$level2."';</script>");
 
                         }else if (strlen($r6sid) >= 40){ // ممنوع يكثر عن 40 حرف
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$r6sid."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$r6sid."';</script>");
                         }else if (strlen($level2) >= 5){ // ممنوع يكثر عن 99999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$level2."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$level2."';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_r6s = "SELECT username FROM `r6s-team` WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_r6s)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -211,14 +211,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_r6s = "INSERT INTO `r6s-team` (username,`Steam/Uplay/PS4/xBox-ID`,`your-rank`,`your-level`,platform)VALUES(?,?,?,?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_r6s)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "sssis", $name, $r6sid, $your_rank1, $level2, $platform2);
 
@@ -242,47 +242,47 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($epicid) || empty($kills) || empty($wins) || empty($kd)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (!preg_replace("#[^a-zA-Z0-9]#i", "", $epicid)){// مسماح لل انبوت فقط خروف والارقام
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$epicid."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$epicid."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $kills)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$kills."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$kills."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $wins)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$wins."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$wins."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $kd)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$kd."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$kd."';</script>");
 
                         }else if (strpos($epicid, ' ') != false){ // ممنوع المسافات
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$epicid."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$epicid."';</script>");
                         }else if (strpos($kills, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$kills."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$kills."';</script>");
                         }else if (strpos($wins, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$wins."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$wins."';</script>");
                         }else if (strpos($kd, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$kd."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$kd."';</script>");
 
                         }else if(!filter_var($kills, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberki&uid=".$kills."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberki&uid=".$kills."';</script>");
                         }else if(!filter_var($wins, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberw&uid=".$wins."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberw&uid=".$wins."';</script>");
                         }else if(!filter_var($kd, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberkd&uid=".$kd."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberkd&uid=".$kd."';</script>");
 
                         }else if (strlen($epicid) >= 50){ // ممنوع يكثر عن 50 حرف
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$epicid."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$epicid."';</script>");
                         }else if (strlen($kills) >= 6){ // ممنوع يكثر عن 999999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$kills."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$kills."';</script>");
                         }else if (strlen($wins) >= 6){ // ممنوع يكثر عن 999999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$wins."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$wins."';</script>");
                         }else if (strlen($kd) >= 6){ // ممنوع يكثر عن 999999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$kd."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$kd."';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_fortnite = "SELECT username FROM `fortnite-team` WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_fortnite)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -292,14 +292,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_fortnite = "INSERT INTO `fortnite-team` (username,`Epic-ID`,`Your-Kills`,`Your-Wins`,`Your-K/D`)VALUES(?,?,?,?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_fortnite)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ssiii", $name, $epicid, $kills, $wins, $kd);
 
@@ -325,31 +325,31 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($r6sid1) || empty($level3) || $platform3 == "0" || $solo_duel == "0" || $doubles == "0" || $standard == "0" || $solo_standard == "0"){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (!preg_replace("#[^a-zA-Z0-9]#i", "", $r6sid1)){// مسماح لل انبوت فقط خروف والارقام
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$r6sid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$r6sid1."';</script>");
                         }else if (!preg_replace("#[^0-9]#i", "", $level3)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level3."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=strnum&uid=".$level3."';</script>");
 
                         }else if (strpos($r6sid1, ' ') != false){ // ممنوع المسافات
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$r6sid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$r6sid1."';</script>");
                         }else if (strpos($level3, ' ') != false){
-                            echo("<script>location.href = 'index.php?error=joinas&err=space&uid=".$level3."';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=space&uid=".$level3."';</script>");
 
                         }else if(!filter_var($level3, FILTER_VALIDATE_INT)){// يتاكد انه رقم
-                            echo("<script>location.href = 'index.php?error=numberl3&uid=".$level3."';</script>");
+                            exit("<script>location.href = 'index.php?error=numberl3&uid=".$level3."';</script>");
 
                         }else if (strlen($r6sid1) >= 50){ // ممنوع يكثر عن 50 حرف
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$r6sid1."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$r6sid1."';</script>");
                         }else if (strlen($level3) >= 6){ // ممنوع يكثر عن 999999
-                            echo("<script>location.href = 'index.php?error=mix&uid=".$level3."';</script>");
+                            exit("<script>location.href = 'index.php?error=mix&uid=".$level3."';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_rl = "SELECT username FROM `rocket-league-team` WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_rl)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -359,14 +359,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_rl = "INSERT INTO `rocket-league-team` (username,`Steam/PS4/xBox-ID`,`Your-Level`,Platform,`Your-Rank-in-1v1-Solo-Duel`,`Your-Rank-in-2v2-Doubles`,`Your-Rank-in-3v3-Standard`,`Your-Rank-in-3v3-Solo-Standard`)VALUES(?,?,?,?,?,?,?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_rl)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ssisssss", $name,$r6sid1, $level3, $platform3, $solo_duel, $doubles, $standard, $solo_standard);
 
@@ -386,16 +386,16 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($programmer)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (strlen($programmer) >= 1201){ // ممنوع يكثر عن 50 حرف
-                            echo("<script>location.href = 'index.php?error=mix';</script>");
+                            exit("<script>location.href = 'index.php?error=mix';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_programmer = "SELECT username FROM programmer WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_programmer)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -405,14 +405,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_programmer = "INSERT INTO programmer (username,text)VALUES(?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_programmer)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ss", $name, $programmer);
 
@@ -432,16 +432,16 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($designer)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (strlen($designer) >= 1201){ // ممنوع يكثر عن 50 حرف
-                            echo("<script>location.href = 'index.php?error=mix';</script>");
+                            exit("<script>location.href = 'index.php?error=mix';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_designer = "SELECT username FROM designer WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_designer)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -451,14 +451,14 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
 
                                 }else{
                                     // تعريف المعلومات
                                     $sql_designer = "INSERT INTO designer (username,text)VALUES(?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_designer)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ss", $name, $designer);
 
@@ -478,16 +478,16 @@ session_regenerate_id();
 
                         // اتحقق من الانبوت
                         if(empty($editor)){
-                            echo("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
+                            exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
 
                         }else if (strlen($editor) >= 1201){ // ممنوع يكثر عن 50 حرف
-                            echo("<script>location.href = 'index.php?error=mix';</script>");
+                            exit("<script>location.href = 'index.php?error=mix';</script>");
 
                         }else{// تعرف للقواعد البينات
                             $sql_select_editor = "SELECT username FROM editor WHERE username=?";
                             $stmt_select = mysqli_stmt_init($conn);
                             if(!mysqli_stmt_prepare($stmt_select, $sql_select_editor)){
-                                echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
 
                             }else{
                                 mysqli_stmt_bind_param($stmt_select, "s", $name);
@@ -497,13 +497,13 @@ session_regenerate_id();
                                 mysqli_stmt_store_result($stmt_select);
                                 $resultCheck = mysqli_stmt_num_rows($stmt_select);
                                 if($resultCheck > 0){
-                                    echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                                    exit("<script>location.href = 'index.php?error=userTaken';</script>");
                                 }else{
                                     // تعريف المعلومات
                                     $sql_editor = "INSERT INTO editor (username,text)VALUES(?,?)";
                                     $stmt = mysqli_stmt_init($conn);
                                     if(!mysqli_stmt_prepare($stmt, $sql_editor)){
-                                        echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                        exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
                                         mysqli_stmt_bind_param($stmt, "ss", $name, $editor);
 
@@ -518,36 +518,36 @@ session_regenerate_id();
                 $query = "SELECT name FROM register WHERE name = ?";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt, $query)){
-                    echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                    exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                 }else{
                     mysqli_stmt_bind_param($stmt, "s" ,$name);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_store_result($stmt);
                     $resultCheck = mysqli_stmt_num_rows($stmt);
                     if($resultCheck > 0){
-                        echo("<script>location.href = 'index.php?error=userTaken';</script>");
+                        exit("<script>location.href = 'index.php?error=userTaken';</script>");
                     }else{
                         $query1 = "SELECT email FROM register WHERE email = ?";
                         $stmt = mysqli_stmt_init($conn);
                         if(!mysqli_stmt_prepare($stmt, $query1)){
-                            echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                            exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                         }else{
                             mysqli_stmt_bind_param($stmt, "s", $email);
                             mysqli_stmt_execute($stmt);
                             mysqli_stmt_store_result($stmt);
                             $resultCheck = mysqli_stmt_num_rows($stmt);
                             if($resultCheck > 0){
-                                echo("<script>location.href = 'index.php?error=emailTaken';</script>");
+                                exit("<script>location.href = 'index.php?error=emailTaken';</script>");
                             }else{
                                 $status = 0;
                                 $query2 = "INSERT INTO register (name,email,Country,age,twitter,instagram,Joinas,status)VALUES(?,?,?,?,?,?,?,?)";
                                 $stmt = mysqli_stmt_init($conn);
                                 if(!mysqli_stmt_prepare($stmt, $query2)){
-                                    echo("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
+                                    exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                 }else{
                                     mysqli_stmt_bind_param($stmt, "sssisssi", $name, $email, $country, $age, $link1, $link2, $joinas, $status);
                                     mysqli_stmt_execute($stmt);
-                                    echo("<script>location.href = 'index.php?signup=success';</script>");
+                                    exit("<script>location.href = 'index.php?signup=success';</script>");
                                 }
                             }
                         }
