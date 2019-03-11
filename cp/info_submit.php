@@ -10,25 +10,25 @@ if(isset($_SESSION['login']) == "Owner" or isset($_SESSION['login']) == "admin")
     <?php
     if($_SESSION['run'] === 'ow'){
         $_SESSION['status_in'] = "overwatch-team";
-        $_SESSION['query'] = "SELECT `Battle/PS4/xBox/ID`,`your-sr`,`your-level`,`your-main`,`platform`,`date` FROM `overwatch-team` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`Battle/PS4/xBox/ID`,`your-sr`,`your-level`,`your-main`,`platform`,`date` FROM `overwatch-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'r6s'){
         $_SESSION['status_in'] = "r6s-team";
-        $_SESSION['query'] = "SELECT `Steam/Uplay/PS4/xBox-ID`,`your-rank`,`your-level`,`platform`,`date` FROM `r6s-team` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`Steam/Uplay/PS4/xBox-ID`,`your-rank`,`your-level`,`platform`,`date` FROM `r6s-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'fortnite'){
         $_SESSION['status_in'] = "fortnite-team";
-        $_SESSION['query'] = "SELECT `Epic-ID`,`Your-Kills`,`Your-Wins`,`Your-K/D`,`date` FROM `fortnite-team` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`Epic-ID`,`Your-Kills`,`Your-Wins`,`Your-K/D`,`date` FROM `fortnite-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'rl'){
         $_SESSION['status_in'] = "rocket-league-team";
-        $_SESSION['query'] = "SELECT `Steam/PS4/xBox-ID`,`Your-Level`,`Platform`,`Your-Rank-in-1v1-Solo-Duel`,`Your-Rank-in-2v2-Doubles`,`Your-Rank-in-3v3-Standard`,`Your-Rank-in-3v3-Solo-Standard`,`date` FROM `rocket-league-team` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`Steam/PS4/xBox-ID`,`Your-Level`,`Platform`,`Your-Rank-in-1v1-Solo-Duel`,`Your-Rank-in-2v2-Doubles`,`Your-Rank-in-3v3-Standard`,`Your-Rank-in-3v3-Solo-Standard`,`date` FROM `rocket-league-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'programmer'){
         $_SESSION['status_in'] = "programmer";
-        $_SESSION['query'] = "SELECT `text`,`date` FROM `programmer` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `programmer` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'designer'){
         $_SESSION['status_in'] = "designer";
-        $_SESSION['query'] = "SELECT `text`,`date` FROM `designer` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `designer` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'editor'){
         $_SESSION['status_in'] = "editor";
-        $_SESSION['query'] = "SELECT `text`,`date` FROM `editor` LIMIT 1";
+        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `editor` WHERE `username` = '".$_SESSION['users']."'"";
     }
     ?>
     <title>Info</title>

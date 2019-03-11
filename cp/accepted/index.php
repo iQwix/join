@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../../inc/connected.php');
-if(isset($_SESSION['login']) == "Owner"){
+if($_SESSION['login'] == "Owner"){
 ?>
 <!DOCTYPE html>
 <html>
