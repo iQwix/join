@@ -10,25 +10,25 @@ if(isset($_SESSION['login']) == "Owner" or isset($_SESSION['login']) == "admin")
     <?php
     if($_SESSION['run'] === 'ow'){
         $_SESSION['status_in'] = "overwatch-team";
-        $_SESSION['query'] = "SELECT `username`,`Battle/PS4/xBox/ID`,`your-sr`,`your-level`,`your-main`,`platform`,`date` FROM `overwatch-team` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `overwatch-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'r6s'){
         $_SESSION['status_in'] = "r6s-team";
-        $_SESSION['query'] = "SELECT `username`,`Steam/Uplay/PS4/xBox-ID`,`your-rank`,`your-level`,`platform`,`date` FROM `r6s-team` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `r6s-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'fortnite'){
         $_SESSION['status_in'] = "fortnite-team";
-        $_SESSION['query'] = "SELECT `username`,`Epic-ID`,`Your-Kills`,`Your-Wins`,`Your-K/D`,`date` FROM `fortnite-team` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `fortnite-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'rl'){
         $_SESSION['status_in'] = "rocket-league-team";
-        $_SESSION['query'] = "SELECT `username`,`Steam/PS4/xBox-ID`,`Your-Level`,`Platform`,`Your-Rank-in-1v1-Solo-Duel`,`Your-Rank-in-2v2-Doubles`,`Your-Rank-in-3v3-Standard`,`Your-Rank-in-3v3-Solo-Standard`,`date` FROM `rocket-league-team` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `rocket-league-team` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'programmer'){
         $_SESSION['status_in'] = "programmer";
-        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `programmer` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `programmer` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'designer'){
         $_SESSION['status_in'] = "designer";
-        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `designer` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * FROM `designer` WHERE `username` = '".$_SESSION['users']."'";
     }elseif($_SESSION['run'] === 'editor'){
         $_SESSION['status_in'] = "editor";
-        $_SESSION['query'] = "SELECT `username`,`text`,`date` FROM `editor` WHERE `username` = '".$_SESSION['users']."'";
+        $_SESSION['query'] = "SELECT * WHERE `username` = '".$_SESSION['users']."'";
     }
     ?>
     <title>Info</title>
@@ -65,25 +65,18 @@ if(isset($_SESSION['login']) == "Owner" or isset($_SESSION['login']) == "admin")
 //$name_id_selected = null;
 if($_GET[$_SESSION['users']]){
     if($_GET[$_SESSION['users']] == 1){
-        echo $_SESSION['run']."<br>";
-        echo $_SESSION['status_in']."<br>";
-        echo $_SESSION['query']."<br>";
-        echo "name: ".$_SESSION['users']."<br>";
 ?>
 <div class="container">
     <h1 class="text-center heading"><?php echo $_SESSION['status_in']; ?></h1>
 <?php
-        $query5 = "SELECT `name`,`email`,`Country`,`age`,`twitter`,`instagram`,`status` FROM `register` WHERE `name` = '".$_SESSION['users']."'";
+        $query5 = "SELECT * FROM `register` WHERE `name` = '".$_SESSION['users']."'";
         $result5 = mysqli_query($conn, $query5);
-        echo $query5."<br>";
-            echo __LINE__ . "<br>";
             while($row5 = mysqli_fetch_assoc($result5)){
-                $result10 = mysqli_query($conn, $_SESSION['query']);
-                    echo __LINE__ . "<br>";
+                $query11 = $_SESSION['query'];
+                $result10 = mysqli_query($conn, $query11);
                     while($roww = mysqli_fetch_assoc($result10)){
                         echo "<div class='row'><div class='col-lg-4'><ul class='list-group'>";
                         foreach($roww as $key => $rows){
-                            echo __LINE__ . "<br>";
                             echo "<li class='selected list-group-item'><span'>{$key}</span> <span class='text-center'> > <span> <br> <span style='margin-left: 80px'>$rows</span></li>";
                         }
                         echo "</ul></div><div class='col-lg-4'>";
