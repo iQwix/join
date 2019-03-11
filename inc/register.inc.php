@@ -271,9 +271,9 @@ session_regenerate_id();
 
                         }else if (strlen($epicid) >= 50){ // ممنوع يكثر عن 50 حرف
                             exit("<script>location.href = 'index.php?error=mix&uid=".$epicid."';</script>");
-                        }else if (strlen($kills) >= 6){ // ممنوع يكثر عن 999999
+                        }else if (strlen($kills) >= 7){ // ممنوع يكثر عن 999999
                             exit("<script>location.href = 'index.php?error=mix&uid=".$kills."';</script>");
-                        }else if (strlen($wins) >= 6){ // ممنوع يكثر عن 999999
+                        }else if (strlen($wins) >= 8){ // ممنوع يكثر عن 999999
                             exit("<script>location.href = 'index.php?error=mix&uid=".$wins."';</script>");
                         }else if (strlen($kd) >= 6){ // ممنوع يكثر عن 999999
                             exit("<script>location.href = 'index.php?error=mix&uid=".$kd."';</script>");
