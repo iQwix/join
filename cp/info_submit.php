@@ -69,7 +69,7 @@ if($_GET[$_SESSION['users']]){
 <div class="container">
     <h1 class="text-center heading"><?php echo $_SESSION['status_in']; ?></h1>
 <?php
-        $query5 = "SELECT `name`,`email`,`Country`,`age`,`twitter`,`instagram`,`status` FROM `register` WHERE `name` = '".$_SESSION['users']."' LIMIT 1";
+        $query5 = "SELECT `name`,`email`,`Country`,`age`,`twitter`,`instagram`,`status` FROM `register` WHERE `name` = '".$_SESSION['users']."'";
         $result5 = mysqli_query($conn, $query5);
         if (mysqli_num_rows($result5) > 0) {
             while($row5 = mysqli_fetch_assoc($result5)){
