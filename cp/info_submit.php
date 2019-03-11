@@ -65,6 +65,10 @@ if(isset($_SESSION['login']) == "Owner" or isset($_SESSION['login']) == "admin")
 //$name_id_selected = null;
 if($_GET[$_SESSION['users']]){
     if($_GET[$_SESSION['users']] == 1){
+        echo $_SESSION['run']."<br>";
+        echo $_SESSION['status_in']."<br>";
+        echo $_SESSION['query']."<br>";
+        echo "name: ".$_SESSION['users']."<br>";
 ?>
 <div class="container">
     <h1 class="text-center heading"><?php echo $_SESSION['status_in']; ?></h1>
