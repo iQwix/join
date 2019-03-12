@@ -239,7 +239,6 @@ session_regenerate_id();
                         $kills = htmlentities(strip_tags($_POST['kills']));
                         $wins = htmlentities(strip_tags($_POST['wins']));
                         $kd = htmlentities(strip_tags($_POST['kd']));
-
                         // اتحقق من الانبوت
                         if(empty($epicid) || empty($kills) || empty($wins) || empty($kd)){
                             exit("<script>location.href = 'index.php?error=joinas&err=empty';</script>");
@@ -266,7 +265,7 @@ session_regenerate_id();
                             exit("<script>location.href = 'index.php?error=numberki&uid=".$kills."';</script>");
                         }else if(!filter_var($wins, FILTER_VALIDATE_INT)){// يتاكد انه رقم
                             exit("<script>location.href = 'index.php?error=numberw&uid=".$wins."';</script>");
-                        }else if(!filter_var($kd, FILTER_VALIDATE_INT)){// يتاكد انه رقم
+                        }else if(is_string($kd)){// يتاكد انه رقم
                             exit("<script>location.href = 'index.php?error=numberkd&uid=".$kd."';</script>");
 
                         }else if (strlen($epicid) >= 50){ // ممنوع يكثر عن 50 حرف
