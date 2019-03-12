@@ -297,7 +297,7 @@ session_regenerate_id();
                                     if(!mysqli_stmt_prepare($stmt, $sql_fortnite)){
                                         exit("<script>location.href = 'index.php?error=sqlerror". __LINE__ ."';</script>");
                                     }else{
-                                        mysqli_stmt_bind_param($stmt, "ssiii", $name, $epicid, $kills, $wins, $kd);
+                                        mysqli_stmt_bind_param($stmt, "ssiid", $name, $epicid, $kills, $wins, $kd);
 
                                         // اارسل المعلومات
                                         mysqli_stmt_execute($stmt);
