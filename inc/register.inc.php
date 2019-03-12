@@ -265,9 +265,6 @@ session_regenerate_id();
                             exit("<script>location.href = 'index.php?error=numberki&uid=".$kills."';</script>");
                         }else if(!filter_var($wins, FILTER_VALIDATE_INT)){// يتاكد انه رقم
                             exit("<script>location.href = 'index.php?error=numberw&uid=".$wins."';</script>");
-                        }else if(is_string($kd)){// يتاكد انه رقم
-                            exit("<script>location.href = 'index.php?error=numberkd&uid=".$kd."';</script>");
-
                         }else if (strlen($epicid) >= 50){ // ممنوع يكثر عن 50 حرف
                             exit("<script>location.href = 'index.php?error=mix&uid=".$epicid."';</script>");
                         }else if (strlen($kills) >= 7){ // ممنوع يكثر عن 999999
